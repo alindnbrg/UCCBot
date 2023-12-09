@@ -17,15 +17,14 @@ def app():
     st.sidebar.image("resources/logo_light.svg", width=125)
     st.sidebar.write("hightech with a heartbeat")
 
-    page = st.sidebar.radio("Choose a page:", list(PAGES.keys()))
+    page = st.sidebar.radio("Choose a page", list(PAGES.keys()))
 
     st.sidebar.write(" ")
     st.sidebar.markdown(
         f"""
-
-        Configuration:
+        Configuration
         * analyzed use cases: {use_case_count()}
-        * your archetypes: {len(st.session_state.archetypes)}
+        * archetypes: {len(st.session_state.archetypes)}
         """
     )
     st.sidebar.write(" ")
@@ -33,6 +32,12 @@ def app():
     if st.sidebar.button('Reset application'):
         clear_state()
         st.rerun()
+
+    st.sidebar.write(" ")
+    st.sidebar.markdown(
+        '<a href="mailto:andre.lindenberg@exxeta.com?subject=Use Case Classification Bot" target="_blank">Have a question?</a> :mailbox_with_no_mail:',
+        unsafe_allow_html=True
+    )
 
     return PAGES[page]
 

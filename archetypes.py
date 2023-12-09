@@ -5,7 +5,18 @@ from state import set_state  # Import from state.py
 
 def app():
     st.markdown('### Archetype Database :gear:')
+
+    # Legend for the table columns
+    st.markdown("""
+    - name :point_right: *The name of the archetype*
+    - keywords :point_right: *Descriptive keywords associated with the archetype*
+    - implementation_notes :point_right: *your technology and servicesthat make this archetype unique*
+    - business_value :point_right: *an indication of the business value provided by this archetype, along with potential metrics or indicators for quantifying it*
+    """)
+
+
     st.markdown('---')
+    st.write(" ")
 
     if len(st.session_state.archetypes) == 0:
         st.write("No archetypes found. Please import a JSON file.")
