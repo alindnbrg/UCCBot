@@ -56,6 +56,9 @@ class AzureGPT4Chat():
       Emoji shortcodes, such as :+1: and :sunglasses:. For a list of all supported codes, see https://share.streamlit.io/streamlit/emoji-shortcodes.
       LaTeX expressions, by wrapping them in "$" or "$$" (the "$$" must be on their own lines). Supported LaTeX functions are listed at https://katex.org/docs/supported.html.
       Colored text, using the syntax :color[text to be colored], where color needs to be replaced with any of the following supported colors: blue, green, orange, red, violet, gray/grey, rainbow.
+
+      If the prompt does not look like an LLM use case to you,
+      respond politly that you are only interested in LLM use cases.
     """
 
     return self.llm([HumanMessage(content=template)]).content
