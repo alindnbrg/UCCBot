@@ -5,3 +5,4 @@ venv
 .vscode
 local_dir
 __pycache__/
+session_state.pkl

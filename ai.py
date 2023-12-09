@@ -40,7 +40,7 @@ class AzureGPT4Chat():
       by naming required components, examplary products and technologies,
       and how the are used to implement the use case
       3. Describe the business value of the use case and try to quantify it;
-      use charts and graphs if appropriate
+      use charts, tables where appropriate.
 
       LLM Use Case:
       {prompt}

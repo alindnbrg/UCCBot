@@ -6,6 +6,13 @@ from state import set_state  # Import from state.py
 # Initialize the LLM object
 llm = ai.AzureGPT4Chat()
 
+# Render chat messages
+def render_messages(messages):
+    # Display chat messages from history
+    for message in messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
 def app():
     st.subheader("Use Case Classifier")
 
@@ -17,13 +24,14 @@ def app():
     with st.expander("Disclaimer"):
         st.write(st.session_state.disclaimer)
 
-    # Display chat messages from history
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+    render_messages(st.session_state.messages)
 
     # Accept user input
     if prompt := st.chat_input("Share your idea or ask a question..."):
+
+        # display the messages in the chat
+        render_messages([{"role": "user", "content": prompt}])
+
         # Update chat history with user message
         updated_messages = st.session_state.messages + [{"role": "user", "content": prompt}]
         set_state('messages', updated_messages)
