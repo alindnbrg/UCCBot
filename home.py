@@ -18,7 +18,7 @@ def app():
 
     # Check if archetypes are available
     if len(st.session_state.archetypes) == 0:
-        st.warning(st.session_state.no_archetypes_message)
+        st.info(st.session_state.no_archetypes_message)
         return  # Return early to prevent showing the chat interface
 
     with st.expander("Disclaimer"):

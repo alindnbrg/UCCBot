@@ -52,7 +52,7 @@ def load_state():
         for key, value in loaded_state.items():
             st.session_state[key] = value
 
-def save_session_state():
+def save_state():
     """
     Saves the current session state to a file.
     """
@@ -68,7 +68,7 @@ def set_state(key, value):
     value: The value to set for the given key.
     """
     st.session_state[key] = value
-    save_session_state()
+    save_state()
 
 def clear_state():
     """
