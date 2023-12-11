@@ -22,12 +22,13 @@ def app():
     st.sidebar.write(" ")
     st.sidebar.markdown(
         f"""
-        Configuration
+        Statistics
         * analyzed use cases: {use_case_count()}
         * archetypes: {len(st.session_state.archetypes)}
         """
     )
     st.sidebar.write(" ")
+
 
     # add a password type textfiled to the sidebar
     api_token = st.sidebar.text_input(
