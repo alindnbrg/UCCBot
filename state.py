@@ -24,7 +24,7 @@ def init_state():
             you know about the following list of llm use case archetypes:
             {st.session_state.archetypes}
 
-            Here's a LLM use case.
+            For the GenAI LLM Use provided below, please do the following:
             1. Categorize the use case based on the provided archetypes. If
             a use case cannot be categorized, create a new archetype. Only do that,
             if absolutely necessary.
@@ -39,14 +39,10 @@ def init_state():
             and links to external resources.
             Use colored text or emojis to highlight important parts.
 
-            OUTPUT Format mus be compliant with the Github-flavored Markdown.
-            Syntax information can be found at: https://github.github.com/gfm.
-            This also supports:
-            Emoji shortcodes, such as :+1: and :sunglasses:. For a list of all supported codes, see https://share.streamlit.io/streamlit/emoji-shortcodes.
-            Colored text, using the syntax :color[text to be colored], where color needs to be replaced with any of the following supported colors: blue, green, orange, red, violet, gray/grey, rainbow.
-
             If the prompt does not look like an LLM use case to you,
             respond politly that you are only interested in LLM use cases.
+
+            Make the output look great on a streamlit page.
 
             LLM Use Case:\n\n
           """
