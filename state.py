@@ -70,6 +70,8 @@ def init_state():
 
         st.session_state.no_archetypes_message = """
             No archetypes found. Please upload archetypes to proceed.
+
+            **Find and example in ./resources/archetypes.json**
         """
 
 def load_state():
