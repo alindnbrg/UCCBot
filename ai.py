@@ -4,7 +4,7 @@ import requests
 import streamlit as st
 
 from langchain.llms.base import LLM
-# from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 
 class ExxetaAI(LLM):

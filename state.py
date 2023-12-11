@@ -38,11 +38,10 @@ def init_state():
             Use syntax highlighting for code snippets,
             and links to external resources.
             Use colored text or emojis to highlight important parts.
+            Use tables, if appropriate.
 
             If the prompt does not look like an LLM use case to you,
             respond politly that you are only interested in LLM use cases.
-
-            Make the output look great on a streamlit page.
 
             LLM Use Case:\n\n
           """
@@ -69,9 +68,10 @@ def init_state():
         """
 
         st.session_state.no_archetypes_message = """
-            No archetypes found. Please upload archetypes to proceed.
-
-            **Find and example in ./resources/archetypes.json**
+            Before you can use the classifier, you need to provide a
+            list of GenAI use case archetypes. Visit the archetypes page
+            using the navigation bar on the left and upload the demo file
+            you can find at *./resources/archetypes.json*.
         """
 
 def load_state():
