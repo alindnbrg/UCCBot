@@ -48,18 +48,6 @@
     "business_value": "Improves accessibility for people with disabilities, ensures compliance with accessibility standards, broadens market reach, enhances inclusivity and diversity."
   },
   {
-    "name": "Interactive Entertainment and Gaming",
-    "keywords": "entertainment, gaming, interactive",
-    "implementation_notes": "Gaming LLM for creating dynamic and responsive game narratives, AI-driven characters with realistic behaviors, integration with VR/AR technologies for immersive experiences, procedural content generation for varied gameplay.",
-    "business_value": "Elevates gaming and entertainment experiences, encourages innovation in interactive storytelling, increases user engagement and game replayability."
-  },
-  {
-    "name": "Healthcare and Medical Assistance",
-    "keywords": "healthcare, medical, patient care",
-    "implementation_notes": "Healthcare-specific LLM for patient interaction and support, integration with medical databases for informed assistance, tools for symptom analysis and preliminary diagnosis, secure and compliant data handling.",
-    "business_value": "Improves patient care and support, assists healthcare professionals with information management, enhances patient engagement and monitoring."
-  },
-  {
     "name": "Information Retrieval and Search",
     "keywords": "search, databases, websites, information retrieval",
     "implementation_notes": "Advanced LLM for efficient information retrieval from diverse data sources, integration of search algorithms with vector databases and knowledge graphs, APIs for seamless data access, ontology-based classification, reasoning over databases for context-aware results.",
