@@ -28,9 +28,8 @@ def init_state():
             1. Categorize the use case based on the provided archetypes. If
             a use case cannot be categorized, create a new archetype. Only do that,
             if absolutely necessary.
-            2. Briefly describe its technical implementation
-            by naming required components, examplary products and technologies,
-            and how the are used to implement the use case
+            2. Describe the technical implementation. Name required components, link them
+            if possible, and describe how they are used to implement the use case.
             3. Describe the business value of the use case and try to quantify it;
             use charts, tables where appropriate.
 
