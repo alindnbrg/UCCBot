@@ -43,8 +43,6 @@ class ExxetaAI(LLM):
 
         return json.loads(response.text).get("choices")[0].get("message").get("content")
 
-
-
     @property
     def _identifying_params(self) -> Mapping[str, Any]:
         """Get the identifying parameters."""
