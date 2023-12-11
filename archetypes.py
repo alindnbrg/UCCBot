@@ -41,7 +41,7 @@ def app():
                 # Optionally save the uploaded file info in the session state.
                 set_state('uploaded_file', uploaded_file)
                 # Rerun the app to reflect the uploaded data.
-                st.experimental_rerun()
+                st.rerun()
             except json.JSONDecodeError:
                 # Display an error message if the uploaded file is not a valid JSON.
                 st.error("Invalid JSON file.")

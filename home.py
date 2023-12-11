@@ -4,7 +4,8 @@ import time
 from state import set_state  # Import from state.py
 
 # Initialize the LLM object
-llm = ai.AzureGPT4Chat()
+from ai import ExxetaAI
+llm = ExxetaAI(model="gpt4-turbo")
 
 # Render chat messages
 def render_messages(messages):
@@ -41,7 +42,7 @@ def app():
             full_response = ""
 
             with st.spinner("thinking... 🤔"):
-                assistant_response = llm(prompt)
+                assistant_response = llm(st.session_state.prompt_template + prompt)
                 time.sleep(1)
 
             for chunk in assistant_response.split(' '):

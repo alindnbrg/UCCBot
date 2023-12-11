@@ -17,6 +17,39 @@ def init_state():
         # initialize the session state with default values
         st.session_state['messages'] = []
         st.session_state['archetypes'] = []
+        st.session_state['api_token'] = None
+        st.session_state['api_model'] = None
+
+        st.session_state['prompt_template'] = f"""
+            you know about the following list of llm use case archetypes:
+            {st.session_state.archetypes}
+
+            Here's a LLM use case.
+            1. Categorize the use case based on the provided archetypes. If
+            a use case cannot be categorized, create a new archetype. Only do that,
+            if absolutely necessary.
+            2. Briefly describe its technical implementation
+            by naming required components, examplary products and technologies,
+            and how the are used to implement the use case
+            3. Describe the business value of the use case and try to quantify it;
+            use charts, tables where appropriate.
+
+            Break your answer down into several paragraphs.
+            Use syntax highlighting for code snippets,
+            and links to external resources.
+            Use colored text or emojis to highlight important parts.
+
+            OUTPUT Format mus be compliant with the Github-flavored Markdown.
+            Syntax information can be found at: https://github.github.com/gfm.
+            This also supports:
+            Emoji shortcodes, such as :+1: and :sunglasses:. For a list of all supported codes, see https://share.streamlit.io/streamlit/emoji-shortcodes.
+            Colored text, using the syntax :color[text to be colored], where color needs to be replaced with any of the following supported colors: blue, green, orange, red, violet, gray/grey, rainbow.
+
+            If the prompt does not look like an LLM use case to you,
+            respond politly that you are only interested in LLM use cases.
+
+            LLM Use Case:\n\n
+          """
 
         # add a first initial message to the session state
         st.session_state['messages'] = [

@@ -1,64 +1,51 @@
+from typing import Any, List, Mapping, Optional
+import json
+import requests
 import streamlit as st
-import os
-from typing import Any
-from dotenv import load_dotenv
-load_dotenv()
 
-from langchain.chat_models import AzureChatOpenAI
-from langchain.callbacks.manager import CallbackManager
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain.schema.messages import HumanMessage
+from langchain.llms.base import LLM
+# from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.callbacks.manager import CallbackManagerForLLMRun
 
-os.environ["OPENAI_API_TYPE"] = "azure"
-os.environ["OPENAI_API_VERSION"] = "2023-07-01-preview"
-os.environ["OPENAI_API_KEY"] = os.getenv("AZURE_EXXETA_API_TOKEN")
-os.environ["AZURE_OPENAI_ENDPOINT"] = os.getenv("AZURE_OPENAI_ENDPOINT")
+class ExxetaAI(LLM):
 
-class AzureGPT4Chat():
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
-    self.model = "gpt-4"
-    self.deployment_name = "exxetagpt-pro"
-    self.llm = AzureChatOpenAI(
-      model=self.model,
-      deployment_name=self.deployment_name,
-      callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-      streaming=True
-    )
+    model: str
 
-  def __call__(self, prompt, *args: Any, **kwds: Any) -> Any:
+    @property
+    def _llm_type(self) -> str:
+        return "custom"
 
-    template = f"""
-      you know about the following list of llm use case archetypes:
-      {st.session_state.archetypes}
+    def _call(
+        self,
+        prompt: str,
+        stop: Optional[List[str]] = None,
+        run_manager: Optional[CallbackManagerForLLMRun] = None,
+        **kwargs: Any,
+    ) -> str:
+        if stop is not None:
+            raise ValueError("stop kwargs are not permitted.")
+        response = requests.request(
+          "POST", f"https://ai.exxeta.com/api/azure/{self.model}/chatCompletion",
+          headers={
+            'Authorization': f'Bearer {st.session_state.api_token}',
+            'Content-Type': 'application/json'
+          },
+          data=json.dumps({
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 2500,
+            "temperature": 0.1,
+            "top_p": 0.95,
+            "frequency_penalty": 0,
+            "presence_penalty": 0,
+            #"stop": "string",
+            "stream": False
+          }))
 
-      Here's a LLM use case.
-      1. Categorize the use case based on the provided archetypes. If
-      a use case cannot be categorized, create a new archetype. Only do that,
-      if absolutely necessary.
-      2. Briefly describe its technical implementation
-      by naming required components, examplary products and technologies,
-      and how the are used to implement the use case
-      3. Describe the business value of the use case and try to quantify it;
-      use charts, tables where appropriate.
+        return json.loads(response.text).get("choices")[0].get("message").get("content")
 
-      LLM Use Case:
-      {prompt}
 
-      Break your answer down into several paragraphs.
-      Use syntax highlighting for code snippets,
-      and links to external resources.
-      Use colored text or emojis to highlight important parts.
 
-      OUTPUT Format mus be compliant with the Github-flavored Markdown.
-      Syntax information can be found at: https://github.github.com/gfm.
-      This also supports:
-      Emoji shortcodes, such as :+1: and :sunglasses:. For a list of all supported codes, see https://share.streamlit.io/streamlit/emoji-shortcodes.
-      LaTeX expressions, by wrapping them in "$" or "$$" (the "$$" must be on their own lines). Supported LaTeX functions are listed at https://katex.org/docs/supported.html.
-      Colored text, using the syntax :color[text to be colored], where color needs to be replaced with any of the following supported colors: blue, green, orange, red, violet, gray/grey, rainbow.
-
-      If the prompt does not look like an LLM use case to you,
-      respond politly that you are only interested in LLM use cases.
-    """
-
-    return self.llm([HumanMessage(content=template)]).content
+    @property
+    def _identifying_params(self) -> Mapping[str, Any]:
+        """Get the identifying parameters."""
+        return {"model": self.model}
